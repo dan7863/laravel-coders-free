@@ -29,10 +29,11 @@ class RouteServiceProvider extends ServiceProvider
 
        //Cambiar el nombre de los verbos de las rutas de la aplicación
 
-        Route::resourceVerbs([
-            'create' => 'crear',
-            'edit' => 'editar'
-        ]);
+        // Route::resourceVerbs([
+        //     'create' => 'crear',
+        //     'edit' => 'editar'
+        // ]);
+
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });

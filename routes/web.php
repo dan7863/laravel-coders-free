@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-
-    return "Hola desde la página de inicio22";
-    // return view('welcome');
-});
+Route::get('/', HomeController::class);
 
 Route::get('/contacto', function(){
     return "Hola desde la página de contactos";
@@ -31,45 +28,36 @@ Route::get('/cursos/{id}', function ($id){
 
 //Rutas CRUD
 
-// //Ruta para mostrar el listado de registros
-// Route::get('/posts', function(){
-//     return "Hola desde la página de posts";
-// });
+//Ruta para mostrar el listado de registros
 
-// //Ruta para mostrar un formulario para crear un registro
-// Route::get('/posts/create', function(){
-//     return "Aquí se mostrará el formulario para crear un post";
-// });
+Route::prefix('posts')->name('posts.')->controller(PostController::class)->group(function(){
 
-// //Ruta para guardar un registro
-// Route::post('/posts', function(){
-//     return "Aquí se guardará el post";
-// });
+    Route::get('/', 'index')->name('index');
+    
+    //Ruta para mostrar un formulario para crear un registro
+    Route::get('/create', 'create')->name('create');
+    
+    //Ruta para guardar un registro
+    Route::post('/', 'store')->name('store');
+    
+    //Ruta para mostrar un registro
+    Route::get('/{post}', 'show')->name('show');
+    
+    //Ruta para mostrar un formulario para editar un registro
+    Route::get('/{post}/edit', 'edit')->name('edit');
+    
+    //Ruta para actualizar un registro
+    Route::patch('/{post}', 'update')->name('update');
+    
+    //Ruta para eliminar un registro
+    Route::delete('/{post}', 'destroy')->name('destroy');
+});
 
-// //Ruta para mostrar un registro
-// Route::get('/posts/{post}', function($post){
-//     return "Aquí se mostrará el post $post";
-// });
 
 
-// //Ruta para mostrar un formulario para editar un registro
-// Route::get('/posts/{post}/edit', function($post){
-//     return "Aquí se mostrará el formulario para editar un post";
-// });
-
-// //Ruta para actualizar un registro
-// Route::patch('/post/{post}', function($post){
-//     return "Aquí se procesará el formulario para editar el post: $post";
-// });
-
-// //Ruta para eliminar un registro
-// Route::delete('/posts/{post}', function($post){
-//     return "Aquí se eliminará el post: $post";
-// });
-
-Route::resource('articles', PostController::class)
-->parameters(['articles' => 'post'])
-->names('posts');
+// Route::resource('articles', PostController::class)
+// ->parameters(['articles' => 'post'])
+// ->names('posts');
 // ->only(['index', 'show']);
 // ->except(['create', 'edit']);
 
