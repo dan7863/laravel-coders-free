@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <h1>Aquí se mostrará el listado del post {{$prueba}} {{$prueba2}}</h1>
+{{-- <x-app-layout> --}}
+@extends('layouts.app2')
+
+@section('title', 'Coders Free')
+
+@push('meta')
+    <meta name="description" content="Cursos de programación gratis">
+@endpush
+
+
+@section('content')
+    <x-slot name="title">
+        Posts
+    </x-slot>
 
     @include('partials.test')
     {{-- @includeIf('partials.test', ['color' => 'red']); --}}
@@ -28,5 +31,5 @@
             </p>
         </x-alert>
     </div>
-</body>
-</html>
+@endsection
+{{-- </x-app-layout> --}}
