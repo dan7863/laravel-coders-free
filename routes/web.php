@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,40 @@ Route::prefix('posts')->name('posts.')->controller(PostController::class)->group
 // ->only(['index', 'show']);
 // ->except(['create', 'edit']);
 
+
+Route::get('/prueba', function(){
+    // $users = DB::table('users')
+    // ->orderBy('id')
+    // ->chunk(100, function($users){
+    //     foreach($users as $user){
+    //         echo $user->name . '<br>';
+    //     }
+    // });
+
+    // $users = DB::table('users')->get();
+
+    // foreach($users as $user){
+    //     echo $user->name . '<br>';
+    // }
+
+    // $users = DB::table('users')
+    //             ->orderBy('id')
+    //             ->lazy()->each(function($user){
+    //                 echo $user->name . '<br>';
+    //             });
+
+    // $users = DB::table('users')->max('id');
+     // $users = DB::table('users')->min('id');
+    // $users = DB::table('users')->avg('id');
+
+    $a = array(1, 2, 3);
+    $b = array(3, 2, 5);
+    foreach($a as $i => $x){
+        echo str_repeat($x, $b[$i]) .'<br>';
+    }
+
+    // return $users;
+});
 
 
 
