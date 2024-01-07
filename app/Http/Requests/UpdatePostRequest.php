@@ -11,7 +11,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,13 @@ class UpdatePostRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        $postId = ','. $this->post->id;
+
         return [
-            //
+            'title' => 'required',
+            'body' => 'required',
+            'slug' => ['required', 'unique:posts,slug' . $postId]
         ];
     }
 }

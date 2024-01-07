@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,31 +32,32 @@ Route::get('/cursos/{id}', function ($id){
 
 //Ruta para mostrar el listado de registros
 
-Route::prefix('posts')->name('posts.')->controller(PostController::class)->group(function(){
+// Route::prefix('posts')->name('posts.')->controller(PostController::class)->group(function(){
 
-    Route::get('/', 'index')->name('index');
+//     Route::get('/', 'index')->name('index');
     
-    //Ruta para mostrar un formulario para crear un registro
-    Route::get('/create', 'create')->name('create');
+//     //Ruta para mostrar un formulario para crear un registro
+//     Route::get('/create', 'create')->name('create');
     
-    //Ruta para guardar un registro
-    Route::post('/', 'store')->name('store');
+//     //Ruta para guardar un registro
+//     Route::post('/', 'store')->name('store');
     
-    //Ruta para mostrar un registro
-    Route::get('/{post}', 'show')->name('show');
+//     //Ruta para mostrar un registro
+//     Route::get('/{post}', 'show')->name('show');
     
-    //Ruta para mostrar un formulario para editar un registro
-    Route::get('/{post}/edit', 'edit')->name('edit');
+//     //Ruta para mostrar un formulario para editar un registro
+//     Route::get('/{post}/edit', 'edit')->name('edit');
     
-    //Ruta para actualizar un registro
-    Route::patch('/{post}', 'update')->name('update');
+//     //Ruta para actualizar un registro
+//     Route::patch('/{post}', 'update')->name('update');
     
-    //Ruta para eliminar un registro
-    Route::delete('/{post}', 'destroy')->name('destroy');
-});
+//     //Ruta para eliminar un registro
+//     Route::delete('/{post}', 'destroy')->name('destroy');
+// });
 
 
 
+Route::resource('posts', PostController::class)->names('posts');
 // Route::resource('articles', PostController::class)
 // ->parameters(['articles' => 'post'])
 // ->names('posts');
@@ -88,13 +90,12 @@ Route::get('/prueba', function(){
      // $users = DB::table('users')->min('id');
     // $users = DB::table('users')->avg('id');
 
-    $a = array(1, 2, 3);
-    $b = array(3, 2, 5);
-    foreach($a as $i => $x){
-        echo str_repeat($x, $b[$i]) .'<br>';
-    }
-
     // return $users;
+
+    $users = User::get();
+    $user = new User();
+
+    return $users;
 });
 
 
