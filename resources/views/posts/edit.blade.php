@@ -10,63 +10,53 @@
         </ul>
     @endif --}}
 
-    <form action="{{route('posts.update', $post)}}" method = "POST">
+    <form class="bg-white rounded px-8 pt-6 pb-8 mb-4" action="{{route('posts.update', $post)}}" method = "POST">
         @csrf
         @method('PUT')
-        <div>
-            <label>
-                Título
-            </label>
-            <br>
-            <input type = "text" value = "{{old('title', $post->title)}}" name = "title" id = "">
-            <br>
-            @error('title')
-                <span style = "color: brown;">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Título
+          </label>
+          <input type = "text" value = "{{old('title', $post->title)}}" name = "title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Título">
+
+           @error('title')
+                <span class = "text-red-600">
                     {{$message}}
                 </span>
-            @enderror
-            <br>
+           @enderror
         </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            Slug
+          </label>
+          <input type = "text" value = "{{old('title', $post->slug)}}" name = "slug" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder = "Slug">
 
-        <div>
-            <label>
-                Slug
-            </label>
-            <br>
-            <input type = "text" value = "{{old('title', $post->slug)}}" name = "slug" id = "">
-            <br>
-            @error('slug')
-                <span style = "color: brown;">
-                    {{$message}}
-                </span>
-            @enderror
-            <br>
+          @error('slug')
+            <span class = "text-red-600">
+                {{$message}}
+            </span>
+          @enderror
         </div>
-        
-        <br>
-
-        <div>
-            <label>
-                Contenido del Post:
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+                Contenido del Post
             </label>
 
             <br>
-
-            <textarea name="body" id="" cols="30" rows="10">{{old('title', $post->body)}}</textarea>
+            <textarea name="body" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="" cols="30" rows="10">{{old('title', $post->body)}}</textarea>
 
             <br>
             @error('body')
-                <span style = "color: brown;">
+                <span class = "text-red-600">
                     {{$message}}
                 </span>
             @enderror
             <br>
         </div>
-
-        <br>
-
-        <button type = "submit">
-            Editar Post
-        </button>
-    </form>
+        <div class="flex items-center justify-between">
+          <button type = "submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            Crear Post
+          </button>
+        </div>
+      </form>
 </x-post-template>
